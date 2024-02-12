@@ -1,21 +1,21 @@
 <script setup>
 import axios from '@/plugins/axios';
+import router from '@/plugins/router';
 import avatar1 from '@images/avatars/avatar-1.png';
 import { computed, ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import { useStore } from 'vuex';
 
 const logout = () => {
-  localStorage.removeItem('user');
+  localStorage.removeItem('admin');
   localStorage.removeItem('isAuthenticated');
-  window.location.href = '/login';
+  router.push({ path: '/admin/login' });
 };
-
 
 const toast = useToast();
 const store = useStore()
 const openDialogPassword = ref(false);
-const user = JSON.parse(localStorage.getItem('user')) || computed(() => store.state.user).value;
+const user = JSON.parse(localStorage.getItem('admin')) || computed(() => store.state.user).value;
 const formRef = ref(null);
 const formValue = ref({
   password: '',

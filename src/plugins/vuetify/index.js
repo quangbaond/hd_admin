@@ -6,6 +6,7 @@ import { themes } from './theme'
 
 // Styles
 import '@core/scss/template/libs/vuetify/index.scss'
+import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 export default function (app) {

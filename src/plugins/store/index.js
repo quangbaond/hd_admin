@@ -7,6 +7,12 @@ const store = createStore({
     return {
       user: {},
       isAuthenticated: false,
+      snackbar: {
+        type: false,
+        message: 'alert',
+        color: 'success',
+        colorBtn: '#fff',
+      },
     }
   },
   mutations: {
@@ -15,6 +21,11 @@ const store = createStore({
     },
     setIsAuthenticated(state, isAuthenticated) {
       state.isAuthenticated = isAuthenticated
+    },
+    setSnackbar(state, payload) {
+      state.snackbar.type = payload.type
+      state.snackbar.message = payload.message
+      state.snackbar.color = payload.color
     },
   },
 })

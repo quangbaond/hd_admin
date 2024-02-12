@@ -61,8 +61,9 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: ['vuetify'],
-    entries: [
-      './src/**/*.vue',
-    ],
+    entries: ['./src/**/*.vue'],
+  },
+  server: {
+    port: 3000,
   },
 })

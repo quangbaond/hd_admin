@@ -24,7 +24,7 @@ const loading = ref(false)
 const submit = async () => {
   loading.value = true
   axios.post('/login', form.value).then((res) => {
-    localStorage.setItem('user', JSON.stringify(res.user))
+    localStorage.setItem('admin', JSON.stringify(res.user))
     localStorage.setItem('isAuthenticated', true)
     store.commit('setUser', res.user)
     store.commit('setIsAuthenticated', true)
@@ -34,7 +34,7 @@ const submit = async () => {
       position: 'top',
     })
     loading.value = false
-    router.push({ path: '/' })
+    router.push({ path: '/admin' })
   }).catch((error) => {
     loading.value = false
     toast.open({

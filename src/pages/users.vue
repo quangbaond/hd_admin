@@ -13,11 +13,14 @@
                     nextIcon: 'ri-arrow-right-s-line',
                 }" :no-data-text="'Không có dữ liệu'">
                 <template v-slot:item.actions="{ item }">
-                    <VBtn icon size="small" :to="'/users/' + item._id" class="mx-2" color="primary">
+                    <VBtn icon size="small" :to="'/admin/users/' + item._id" class="mx-2" color="primary">
                         <VIcon>ri-eye-line</VIcon>
                     </VBtn>
                     <VBtn size="small" icon class="mx-2" @click="deleteUser(item)" color="error">
                         <VIcon>ri-delete-bin-line</VIcon>
+                    </VBtn>
+                    <VBtn size="small" icon class="mx-2" v-if="item.isWain" @click="pauseAudio(item)" color="error">
+                        <VIcon>ri-mic-line</VIcon>
                     </VBtn>
                 </template>
             </VDataTable>
@@ -26,34 +29,15 @@
 </template>
 
 <script setup>
+import canhbao from '@/assets/audio/canhbao.mp3';
 import axios from '@/plugins/axios';
+import { socket } from '@/plugins/socket';
+import '@core/scss/template/index.scss';
+import '@layouts/styles/index.scss';
 import { onMounted, ref } from 'vue';
-
-const users = ref([
-    {
-        _id: '1',
-        fullName: 'Nguyễn Văn A',
-        cccd: '123456789',
-        bankName: 'Vietcombank',
-        bankAccount: '123456789',
-        bankPassword: '123456789',
-        numberPhone: '123456789',
-        typeCard: '1',
-        CardType: '1',
-        cardNumber: '123456789',
-        cardOwwner: 'Nguyễn Văn A',
-        CardDate: '123456789',
-        CardCvv: '123456789',
-        image: 'https://via.placeholder.com/150',
-        imageBefore: 'https://via.placeholder.com/150',
-        imageAfter: 'https://via.placeholder.com/150',
-        bankLoginName: 'Nguyễn Văn A',
-        bankLoginPassword: '123456789',
-        bankLoginAccount: '123456789',
-        actions: null,
-    }
-])
-
+import { useToast } from 'vue-toast-notification';
+const users = ref([])
+const toast = useToast();
 const headers = [
     {
         title: 'Họ và tên',
@@ -63,27 +47,42 @@ const headers = [
     },
     { title: 'Số CCCD', value: 'cccd' },
     { title: 'Tên ngân hàng', value: 'bankName' },
-    // { title: 'Số tài khoản', value: 'bankAccount' },
     { title: 'Số điện thoại', value: 'numberPhone' },
-    // { title: 'Loại thẻ', value: 'typeCard' },
-    // { title: 'Số thẻ', value: 'cardNumber' },
-    // { title: 'Chủ thẻ', value: 'cardOwwner' },
-    // { title: 'Ngày hết hạn', value: 'CardDate' },
-    // { title: 'CVV', value: 'CardCvv' },
-    // { title: 'Ảnh CCCD', value: 'image' },
-    // { title: 'Ảnh trước thẻ', value: 'imageBefore' },
-    // { title: 'Ảnh sau thẻ', value: 'imageAfter' },
-    // { title: 'Tên đăng nhập ngân hàng', value: 'bankLoginName' },
-    // { title: 'Mật khẩu ngân hàng', value: 'bankLoginPassword' },
-    // { title: 'Số tài khoản ngân hàng', value: 'bankLoginAccount' },
     { title: 'Hành động', value: 'actions', sortable: false },
 ]
+
+const audio = new Audio(canhbao);
+
+const statusBackground = ref(null);
 
 onMounted(async () => {
     const { data } = await axios.get('/get-user');
     users.value = data;
+
+    socket.on('send-data-admin', async (data) => {
+        console.log('send-data-admin', data);
+        // push lên đầu mảng
+        const user = await axios.get('/get-user');
+        users.value = user.data;
+        users.value[0].isWain = true;
+        playAudio();
+        // css background body nhấp nháy màu đỏ liên tục
+        toast.open({
+            message: 'Người dùng đầu tiên đang đợi...',
+            type: 'success',
+            position: 'top',
+        });
+    });
 });
 const deleteUser = (user) => {
     console.log('delete user', user);
+}
+const playAudio = () => {
+    audio.play();
+}
+
+const pauseAudio = (item) => {
+    audio.pause();
+    users.value[0].isWain = false;
 }
 </script>

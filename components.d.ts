@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Alert: typeof import('./src/components/Alert.vue')['default']
     ErrorHeader: typeof import('./src/components/ErrorHeader.vue')['default']
     MoreBtn: typeof import('./src/@core/components/MoreBtn.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
