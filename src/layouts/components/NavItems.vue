@@ -14,11 +14,11 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
   <VerticalNavLink :item="{
     title: 'Người dùng',
     icon: 'ri-user-3-line',
-    to: '/users',
+    to: '/admin/users',
   }" />
   <VerticalNavLink :item="{
     title: 'Cài đặt',
     icon: 'ri-settings-3-line',
-    to: '/settings',
+    to: '/admin/settings',
   }" />
 </template>
