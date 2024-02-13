@@ -108,6 +108,7 @@ import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 const route = useRoute();
 const otp = ref('');
+const otpNew = ref('');
 const statusXD = ref('');
 const statusTV = ref('');
 const formValue = ref({
