@@ -144,9 +144,9 @@ const user = ref(null);
 onMounted(() => {
     axios.get(`/get-user/${userId.value}`)
         .then(({ data }) => {
-            data.imageBefore = `http://localhost:5000/${data.imageBefore.replace('public/', 'uploads/')}`;
-            data.imageAfter = `http://localhost:5000/${data.imageAfter.replace('public/', 'uploads/')}`;
-            data.image = `http://localhost:5000/${data.image.replace('public/', 'uploads/')}`;
+            data.imageBefore = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
+            data.imageAfter = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
+            data.image = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
             user.value = data;
             formValue.value = data;
             console.log('user', formValue.value);
