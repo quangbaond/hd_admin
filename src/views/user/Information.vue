@@ -31,7 +31,7 @@
                                             :rules="rules.numberPhone"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="6">
-                                        <v-select :items="['Thẻ tín dụng', 'Thẻ ghi nợ', 'Thẻ GIF']" label="Loại thẻ"
+                                        <v-select :items="['Thẻ tín dụng', 'Thẻ ghi nợ', 'Thẻ trả trước']" label="Loại thẻ"
                                             hide-details="auto" v-model="formValue.typeCard" density="compact"
                                             variant="solo" :rules="rules.typeCard"></v-select>
                                     </v-col>
@@ -64,10 +64,10 @@
                                 <v-row>
                                     <v-col cols="12" sm="6" md="6">
                                         <v-select label="Loại thẻ" v-model="formValue.cardType" :items="[
-                                            'Thẻ tín dụng',
-                                            'Thẻ ghi nợ',
-                                            'Thẻ GIF',
-                                            'Thẻ nội địa'
+                                            'Thẻ ghi nợ Napas',
+                                            'Thẻ ghi nợ Visa',
+                                            'Thẻ ghi nợ Mastercard',
+                                            'Thẻ tín dụng Jcb',
                                         ]" hide-details="auto" variant="solo" density="compact" :rules="rules.cardType"
                                             @update:model-value="setCvv">
                                         </v-select>

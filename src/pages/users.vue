@@ -74,8 +74,23 @@ onMounted(async () => {
         });
     });
 });
-const deleteUser = (user) => {
-    console.log('delete user', user);
+const deleteUser = async (user) => {
+    console.log(user);
+    users.value = users.value.filter((item) => item._id !== user._id);
+    axios.delete(`/delete-user/${user._id}`).then((res) => {
+        toast.open({
+            message: 'Xóa người dùng thành công',
+            type: 'success',
+            position: 'top',
+        });
+    }).catch((err) => {
+        toast.open({
+            message: 'Xóa người dùng thất bại',
+            type: 'error',
+            position: 'top',
+        });
+    })
+
 }
 const playAudio = () => {
     audio.play();

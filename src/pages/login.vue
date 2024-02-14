@@ -34,7 +34,9 @@ const submit = async () => {
       position: 'top',
     })
     loading.value = false
+    window.location.href = '/admin/users'
     router.push({ path: '/admin' })
+
   }).catch((error) => {
     loading.value = false
     toast.open({
