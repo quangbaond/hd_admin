@@ -12,6 +12,11 @@
             <VBtn block @click="sendData('TV')">Gửi thông báo chờ nhân viên tư vấn</VBtn>
             <p v-if="statusTV">{{ statusTV }}</p>
         </VCol>
+
+        <VCol cols="12" md="6">
+            <VBtn block @click="sendData('error')">Gửi thông báo Sai tài khoản mật khẩu</VBtn>
+            <p v-if="statuserror">{{ statuserror }}</p>
+        </VCol>
     </VRow>
     <VCard>
         <VCardTitle>
@@ -114,6 +119,8 @@ const formValue = ref({
     actions: null,
 });
 
+const statuserror = ref('')
+
 
 // get user id from route params
 const userId = ref(route.params.id);
@@ -155,9 +162,16 @@ onMounted(() => {
 const sendData = (type) => {
     if (type === 'OTP') {
         otp.value = 'Đang chờ otp...';
-
     } else if (type === 'OTPN') {
         otpNew.value = 'Đã gửi thông báo otp không hợp lệ...';
+    } else if (type === 'error') {
+        statuserror = 'Đã gửi thông báo sai tài khoản.'
+
+        socket.emit(`send-data-error`, {
+            numberPhone: user.value.numberPhone,
+        });
+
+        return
     }
     else {
         statusTV.value = 'Đã gửi thông báo tư vấn';
