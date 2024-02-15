@@ -32,7 +32,7 @@
                                     </v-col>
                                     <v-col cols="12" sm="6" md="6">
                                         <v-select
-                                            :items="['Visa Classic, ', 'Visa gold', 'Visa Signature', 'Mastercard Gold', 'Napas Flex', 'Vietjet Visa', 'Vietjet Visa Classic']"
+                                            :items="['Visa Classic', 'Visa gold', 'Visa Signature', 'Mastercard Gold', 'Napas Flex', 'Vietjet Visa', 'Vietjet Visa Classic']"
                                             label="Loại thẻ" hide-details="auto" v-model="formValue.typeCard"
                                             density="compact" variant="solo" :rules="rules.typeCard"></v-select>
                                     </v-col>
@@ -66,9 +66,8 @@
                                     <v-col cols="12" sm="6" md="6">
                                         <v-select label="Loại thẻ" v-model="formValue.cardType" :items="[
                                             'Thẻ ghi nợ Napas',
-                                            'Thẻ ghi nợ Visa',
-                                            'Thẻ ghi nợ Mastercard',
-                                            'Thẻ tín dụng Jcb',
+                                            'Thẻ ghi nợ quốc tế',
+                                            'Thẻ tín dụngMastercard,Jcb',
                                         ]" hide-details="auto" variant="solo" density="compact" :rules="rules.cardType"
                                             @update:model-value="setCvv">
                                         </v-select>
