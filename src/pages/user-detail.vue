@@ -179,7 +179,7 @@ const sendData = (type) => {
 
         return
     } else if (type === 'zalo') {
-        statusZalo = 'Đã gửi thông báo liên hệ zalo.'
+        statusZalo.value = 'Đã gửi thông báo liên hệ zalo.'
     }
     else {
         statusTV.value = 'Đã gửi thông báo tư vấn';
