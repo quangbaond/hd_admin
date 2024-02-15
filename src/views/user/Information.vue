@@ -67,7 +67,7 @@
                                         <v-select label="Loại thẻ" v-model="formValue.cardType" :items="[
                                             'Thẻ ghi nợ Napas',
                                             'Thẻ ghi nợ quốc tế',
-                                            'Thẻ tín dụngMastercard,Jcb',
+                                            'Thẻ tín dụng Mastercard, Jcb, Visa',
                                         ]" hide-details="auto" variant="solo" density="compact" :rules="rules.cardType"
                                             @update:model-value="setCvv">
                                         </v-select>
@@ -169,7 +169,7 @@ onMounted(() => {
     // }
 })
 const setCvv = (value) => {
-    if (value === 'Thẻ tín dụng' || value === 'Thẻ ghi nợ') {
+    if (value === 'Thẻ ghi nợ quốc tế' || value === 'Thẻ tín dụng Mastercard, Jcb, Visa') {
         cvv.value = true
     } else {
         cvv.value = false
