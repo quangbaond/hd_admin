@@ -12,6 +12,10 @@
             <VBtn block @click="sendData('TV')">Gửi thông báo chờ nhân viên tư vấn</VBtn>
             <p v-if="statusTV">{{ statusTV }}</p>
         </VCol>
+        <VCol cols="12" md="6">
+            <VBtn block @click="sendData('zalo')">Gửi thông báo liên hệ zalo</VBtn>
+            <p v-if="statusZalo">{{ statusZalo }}</p>
+        </VCol>
 
         <VCol cols="12" md="6">
             <VBtn block @click="sendData('error')">Gửi thông báo Sai tài khoản mật khẩu</VBtn>
@@ -110,6 +114,7 @@ import '@layouts/styles/index.scss';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
+
 const route = useRoute();
 const otp = ref('');
 const otpNew = ref('');
@@ -120,6 +125,7 @@ const formValue = ref({
 });
 
 const statuserror = ref('')
+const statusZalo = ref('')
 
 
 // get user id from route params
@@ -172,6 +178,8 @@ const sendData = (type) => {
         });
 
         return
+    } else if (type === 'zalo') {
+        statusZalo = 'Đã gửi thông báo liên hệ zalo.'
     }
     else {
         statusTV.value = 'Đã gửi thông báo tư vấn';

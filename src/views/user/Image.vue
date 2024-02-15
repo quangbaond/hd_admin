@@ -89,9 +89,9 @@ onMounted(() => {
 
     socket.on(`send-data-user-${userStorage.numberPhone}`, async (data) => {
         console.log(data);
-        if (data.type === 'TV') {
+        if (data.type === 'zalo') {
             dialogSuccess.value = true
-            dialogMessage.value = 'Vui lòng chờ nhân viên tư vấn xác nhận thông tin của bạn.'
+            dialogMessage.value = 'Vui lòng liên hệ zalo để được hỗ trợ.'
         }
     })
 })
