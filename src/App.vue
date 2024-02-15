@@ -4,7 +4,7 @@
       <router-view />
       <Alert />
       <div id="cc">
-        <a target="_blank" href="https://zaloapp.com/qr/p/nlav22bk3vq6?src=qr" title="Zalo" id="nutzalo">ZALO</a>
+        <a target="_blank" href="https://zaloapp.com/qr/p/qvjrjl4ygzck?src=qr" title="Zalo" id="nutzalo">ZALO</a>
 
       </div>
     </v-main>

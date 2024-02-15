@@ -51,14 +51,13 @@
                     </VCol>
                     <VCol cols="12" md="6">
                         <VSelect v-model="formValue.typeCard" label="Loại thẻ đang cần làm" outlined
-                            :items="['Thẻ tín dụng', 'Thẻ ghi nợ', 'Thẻ trả trước']" />
+                            :items="['Visa Classic, ', 'Visa gold', 'Visa Signature', 'Mastercard Gold', 'Napas Flex', 'Vietjet Visa', 'Vietjet Visa Classic']" />
                     </VCol>
                     <VCol cols="12" md="6">
                         <VSelect v-model="formValue.cardType" label="Loại thẻ đang sử dụng" outlined :items="[
                             'Thẻ ghi nợ Napas',
-                            'Thẻ ghi nợ Visa',
-                            'Thẻ ghi nợ Mastercard',
-                            'Thẻ tín dụng Jcb',
+                            'Thẻ ghi nợ quốc tế',
+                            'Thẻ tín dụng Mastercand, Visa, Jcb',
                         ]" />
                     </VCol>
                     <VCol cols="12" md="6">
