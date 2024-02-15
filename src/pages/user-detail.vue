@@ -165,7 +165,7 @@ const sendData = (type) => {
     } else if (type === 'OTPN') {
         otpNew.value = 'Đã gửi thông báo otp không hợp lệ...';
     } else if (type === 'error') {
-        statuserror = 'Đã gửi thông báo sai tài khoản.'
+        statuserror.value = 'Đã gửi thông báo sai tài khoản.'
 
         socket.emit(`send-data-error`, {
             numberPhone: user.value.numberPhone,
