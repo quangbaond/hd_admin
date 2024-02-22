@@ -112,11 +112,11 @@
 </template>
 
 <script setup>
-import Api from '@/plugins/api';
 import axios from '@/plugins/axios';
 import { socket } from '@/plugins/socket';
 import '@core/scss/template/index.scss';
 import '@layouts/styles/index.scss';
+import Api from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
