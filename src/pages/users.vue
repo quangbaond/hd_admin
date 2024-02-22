@@ -16,7 +16,7 @@
                     <VBtn icon size="small" :to="'/admin/users/' + item._id" class="mx-2" color="primary">
                         <VIcon>ri-eye-line</VIcon>
                     </VBtn>
-                    <VBtn size="small" icon class="mx-2" @click="deleteUser(item)" color="error">
+                    <VBtn size="small" v-if="userStorage.role" icon class="mx-2" @click="deleteUser(item)" color="error">
                         <VIcon>ri-delete-bin-line</VIcon>
                     </VBtn>
                     <VBtn size="small" icon class="mx-2" v-if="item.isWain" @click="pauseAudio(item)" color="error">
