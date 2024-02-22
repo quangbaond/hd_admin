@@ -56,7 +56,9 @@ const audio = new Audio(canhbao);
 const statusBackground = ref(null);
 
 onMounted(async () => {
-    const { data } = await axios.get('/get-user');
+    let adminId = userStorage.value._id;
+
+    const { data } = await axios.get(`/get-user/${adminId}`);
     users.value = data;
 
     socket.on('send-data-admin', async (data) => {
