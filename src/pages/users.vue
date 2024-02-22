@@ -36,7 +36,7 @@ import '@core/scss/template/index.scss';
 import '@layouts/styles/index.scss';
 import { onMounted, ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
-const userStorage = JSON.parse(localStorage.getItem('user'));
+const userStorage = JSON.parse(localStorage.getItem('admin'));
 const users = ref([])
 const toast = useToast();
 const headers = [
