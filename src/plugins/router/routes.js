@@ -9,6 +9,7 @@ export const routes = [
         component: () => import('@/pages/users.vue'),
         meta: { requiresAuth: true },
       },
+
       {
         path: 'users/:id',
         component: () => import('@/pages/user-detail.vue'),
@@ -23,6 +24,19 @@ export const routes = [
         path: 'account-settings',
         component: () => import('@/pages/account-settings.vue'),
         meta: { requiresAuth: true },
+      },
+      {
+        path: 'admin',
+        component: () => import('@/pages/admin.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: 'admin/create',
+        component: () => import('@/pages/create-admin.vue'),
+      },
+      {
+        path: 'admin/:id',
+        component: () => import('@/pages/admin-detail.vue'),
       },
     ],
   },

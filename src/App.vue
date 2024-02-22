@@ -5,7 +5,6 @@
       <Alert />
       <div id="cc">
         <a target="_blank" :href="zaloUrl" title="Zalo" id="nutzalo">ZALO</a>
-
       </div>
     </v-main>
   </v-app>

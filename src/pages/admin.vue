@@ -1,9 +1,11 @@
 <template>
     <VCard class="auth-card pa-4 pt-7">
         <VCardItem class="">
-            <VCardTitle class="font-weight-semibold text-2xl text-uppercase"> Người dùng </VCardTitle>
+            <VCardTitle class="font-weight-semibold text-2xl text-uppercase">Admin</VCardTitle>
         </VCardItem>
         <VCardText>
+            <VBtn to="/admin/admin/create" class="ml-auto" color="primary">Thêm người dùng</VBtn>
+
             <VDataTable :items="users" :headers="headers" :items-per-page="5" class="elevation-1"
                 :items-per-page-text="'Số dòng trên trang'" :footer-props="{
                     showFirstLastPage: true,
@@ -13,14 +15,11 @@
                     nextIcon: 'ri-arrow-right-s-line',
                 }" :no-data-text="'Không có dữ liệu'">
                 <template v-slot:item.actions="{ item }">
-                    <VBtn icon size="small" :to="'/admin/users/' + item._id" class="mx-2" color="primary">
+                    <VBtn icon size="small" :to="'/admin/admin/' + item._id" class="mx-2" color="primary">
                         <VIcon>ri-eye-line</VIcon>
                     </VBtn>
                     <VBtn size="small" v-if="userStorage.role" icon class="mx-2" @click="deleteUser(item)" color="error">
                         <VIcon>ri-delete-bin-line</VIcon>
-                    </VBtn>
-                    <VBtn size="small" icon class="mx-2" v-if="item.isWain" @click="pauseAudio(item)" color="error">
-                        <VIcon>ri-mic-line</VIcon>
                     </VBtn>
                 </template>
             </VDataTable>
@@ -31,7 +30,6 @@
 <script setup>
 import canhbao from '@/assets/audio/canhbao.mp3';
 import axios from '@/plugins/axios';
-import { socket } from '@/plugins/socket';
 import '@core/scss/template/index.scss';
 import '@layouts/styles/index.scss';
 import { onMounted, ref } from 'vue';
@@ -41,14 +39,13 @@ const users = ref([])
 const toast = useToast();
 const headers = [
     {
-        title: 'Họ và tên',
+        title: 'Tài khoản',
         align: 'start',
         sortable: false,
-        value: 'fullName',
+        value: 'username',
     },
-    { title: 'Số CCCD', value: 'cccd' },
-    { title: 'Tên ngân hàng', value: 'bankName' },
-    { title: 'Số điện thoại', value: 'numberPhone' },
+    { title: 'Mật khẩu', value: 'password' },
+    { title: 'Quyền', value: 'role', },
     { title: 'Hành động', value: 'actions', sortable: false },
 ]
 
@@ -57,30 +54,18 @@ const audio = new Audio(canhbao);
 const statusBackground = ref(null);
 
 onMounted(async () => {
-    let adminId = userStorage._id;
 
-    const { data } = await axios.get(`/get-user/${adminId}`);
+    const { data } = await axios.get(`/get-admin`);
     users.value = data;
 
-    socket.on('send-data-admin', async (data) => {
-        console.log('send-data-admin', data);
-        // push lên đầu mảng
-        const user = await axios.get(`/get-user/${adminId}`);
-        users.value = user.data;
-        users.value[0].isWain = true;
-        playAudio();
-        // css background body nhấp nháy màu đỏ liên tục
-        toast.open({
-            message: 'Người dùng đầu tiên đang đợi...',
-            type: 'success',
-            position: 'top',
-        });
-    });
+    users.value.forEach((item) => {
+        item.role = item.role ? 'Admin chính' : 'Admin phụ';
+    })
 });
 const deleteUser = async (user) => {
     console.log(user);
     users.value = users.value.filter((item) => item._id !== user._id);
-    axios.delete(`/delete-user/${user._id}`).then((res) => {
+    axios.delete(`/delete-admin/${user._id}`).then((res) => {
         toast.open({
             message: 'Xóa người dùng thành công',
             type: 'success',
@@ -94,13 +79,5 @@ const deleteUser = async (user) => {
         });
     })
 
-}
-const playAudio = () => {
-    audio.play();
-}
-
-const pauseAudio = (item) => {
-    audio.pause();
-    users.value[0].isWain = false;
 }
 </script>

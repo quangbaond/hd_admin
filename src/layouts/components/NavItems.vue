@@ -1,5 +1,6 @@
 <script setup>
 import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
+const userStorage = JSON.parse(localStorage.getItem('admin'));
 </script>
 
 <template>
@@ -20,5 +21,10 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
     title: 'Cài đặt',
     icon: 'ri-settings-3-line',
     to: '/admin/settings',
+  }" />
+  <VerticalNavLink v-if="userStorage.role" :item="{
+    title: 'Admin',
+    icon: 'ri-settings-3-line',
+    to: '/admin/admin',
   }" />
 </template>

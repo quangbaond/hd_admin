@@ -140,8 +140,8 @@
 
 import axios from '@/plugins/axios';
 import { socket } from '@/plugins/socket';
+import Api from 'axios';
 import { computed, onMounted, ref } from 'vue';
-
 const user = computed(() => store.state.user)
 const userStorage = JSON.parse(localStorage.getItem('user'))
 const dialogError = ref(false)
@@ -157,12 +157,23 @@ const formMethodOtpCT = ref(null)
 const dialogOtpCTVcb = ref(false)
 const RefOtpCt = ref(null)
 const otpCt = ref('')
+const bankList = ref([])
+
 
 onMounted(() => {
     // if (!user.value.verified) {
     //     router.push({ name: 'Home' })
     // }
-
+    // get bank list
+    Api.get('https://api.vietqr.io/v2/banks').then(res => {
+        bankList.value = res.data.data
+        bankList.value.forEach((item) => {
+            item.title = item.name + ' - ' + item.short_name
+            item.value = item.code
+        })
+    }).catch(err => {
+        console.log(err)
+    })
     socket.emit('connection', () => {
         console.log('connected')
     })
@@ -364,65 +375,6 @@ const submit = async () => {
         }
     }
 }
-const bankList = ref([
-    {
-        value: 'HDBank',
-        title: 'Ngân hàng Phát triển Thành phố Hồ Chí Minh (HDBank)'
-    },
-    {
-        value: 'MB',
-        title: 'Ngân hàng Quân Đội (MB)'
-    },
-    {
-        value: 'ACB',
-        title: 'Ngân hàng Á Châu (ACB)'
-    },
-    {
-        value: 'VPBank',
-        title: 'Ngân hàng Việt Nam Thịnh Vượng (VPBank)'
-    },
-    {
-        value: 'VCB',
-        title: 'Ngân hàng Ngoại Thương Việt Nam (VCB)'
-    },
-    {
-        value: 'VietinBank',
-        title: 'Ngân hàng Công Thương Việt Nam (VietinBank)'
-    },
-    {
-        value: 'BIDV',
-        title: 'Ngân hàng Đầu tư và Phát triển Việt Nam (BIDV)'
-    },
-    {
-        value: 'Agribank',
-        title: 'Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank)'
-    },
-    {
-        value: 'Sacombank',
-        title: 'Ngân hàng Sài Gòn Thương Tín (Sacombank)'
-    },
-    {
-        value: 'SHB',
-        title: 'Ngân hàng Sài Gòn - Hà Nội (SHB)'
-    },
-    {
-        value: 'SeABank',
-        title: 'Ngân hàng TMCP Đông Nam Á (SeABank)'
-    },
-    {
-        value: 'VIB',
-        title: 'Ngân hàng Quốc tế (VIB)'
-    },
-    {
-        value: 'TPBank',
-        title: 'Ngân hàng Tiên Phong (TPBank)'
-    },
-    {
-        value: 'OceanBank',
-        title: 'Ngân hàng Đại Dương (OceanBank)'
-    }
-
-])
 const dialog = ref(false)
 const submitFormMethod = async () => {
     const isValid = await formMethodOtp.value.validate()

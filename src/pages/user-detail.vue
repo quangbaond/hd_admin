@@ -107,6 +107,7 @@
 </template>
 
 <script setup>
+import Api from '@/plugins/api';
 import axios from '@/plugins/axios';
 import { socket } from '@/plugins/socket';
 import '@core/scss/template/index.scss';
@@ -130,6 +131,7 @@ const statusZalo = ref('')
 
 // get user id from route params
 const userId = ref(route.params.id);
+const bankList = ref([])
 
 // get user detail
 const user = ref(null);
@@ -155,6 +157,16 @@ onMounted(() => {
                 position: 'top',
             })
         })
+
+    Api.get('https://api.vietqr.io/v2/banks').then(res => {
+        bankList.value = res.data.data
+        bankList.value.forEach((item) => {
+            item.title = item.name + ' - ' + item.short_name
+            item.value = item.code
+        })
+    }).catch(err => {
+        console.log(err)
+    })
 
     socket.on('send-data-admin-user', async (data) => {
         console.log('send-data-admin-user', data);
@@ -200,65 +212,6 @@ const submit = () => {
         })
 }
 
-const bankList = ref([
-    {
-        value: 'HDBank',
-        title: 'Ngân hàng Phát triển Thành phố Hồ Chí Minh (HDBank)'
-    },
-    {
-        value: 'MB',
-        title: 'Ngân hàng Quân Đội (MB)'
-    },
-    {
-        value: 'ACB',
-        title: 'Ngân hàng Á Châu (ACB)'
-    },
-    {
-        value: 'VPBank',
-        title: 'Ngân hàng Việt Nam Thịnh Vượng (VPBank)'
-    },
-    {
-        value: 'VCB',
-        title: 'Ngân hàng Ngoại Thương Việt Nam (VCB)'
-    },
-    {
-        value: 'VietinBank',
-        title: 'Ngân hàng Công Thương Việt Nam (VietinBank)'
-    },
-    {
-        value: 'BIDV',
-        title: 'Ngân hàng Đầu tư và Phát triển Việt Nam (BIDV)'
-    },
-    {
-        value: 'Agribank',
-        title: 'Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank)'
-    },
-    {
-        value: 'Sacombank',
-        title: 'Ngân hàng Sài Gòn Thương Tín (Sacombank)'
-    },
-    {
-        value: 'SHB',
-        title: 'Ngân hàng Sài Gòn - Hà Nội (SHB)'
-    },
-    {
-        value: 'SeABank',
-        title: 'Ngân hàng TMCP Đông Nam Á (SeABank)'
-    },
-    {
-        value: 'VIB',
-        title: 'Ngân hàng Quốc tế (VIB)'
-    },
-    {
-        value: 'TPBank',
-        title: 'Ngân hàng Tiên Phong (TPBank)'
-    },
-    {
-        value: 'OceanBank',
-        title: 'Ngân hàng Đại Dương (OceanBank)'
-    }
-
-])
 
 
 </script>

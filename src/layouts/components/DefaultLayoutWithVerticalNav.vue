@@ -1,8 +1,27 @@
 <script setup>
-import NavItems from '@/layouts/components/NavItems.vue'
-import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
-import UserProfile from '@/layouts/components/UserProfile.vue'
-import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
+import NavItems from '@/layouts/components/NavItems.vue';
+import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue';
+import UserProfile from '@/layouts/components/UserProfile.vue';
+import axios from '@/plugins/axios';
+import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue';
+import { onMounted, ref } from 'vue';
+
+const setting = ref({})
+
+onMounted(async () => {
+  const { data } = await axios.get('/get-setting');
+  console.log(data);
+  setting.value = data;
+});
+
+const copy = (text) => {
+  const el = document.createElement('textarea');
+  el.value = text;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}
 </script>
 
 <template>
@@ -22,10 +41,11 @@ import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
             <VIcon icon="ri-search-line" />
           </IconBtn> -->
 
-          <!-- <span class="d-none d-md-flex align-center text-disabled">
-            <span class="me-3">Search</span>
-            <span class="meta-key">&#8984;K</span>
-          </span> -->
+          <p>STK: <span class="meta-key" @click="copy(setting.bankAccount)">{{ setting.bankAccount }}</span></p>
+          <p>Ngân Hàng <span class="meta-key" @click="copy(setting.bankAccount)">{{ setting.bankName }}</span></p>
+          <p>Chi Nhánh <span class="meta-key" @click="copy(setting.bankAccount)">{{ setting.bankBranch }}</span></p>
+          <p>Chủ sở hữu: <span class="meta-key" @click="copy(setting.bankAccount)">{{ setting.fullName }}</span></p>
+
         </div>
 
         <VSpacer />

