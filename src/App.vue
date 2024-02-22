@@ -4,7 +4,7 @@
       <router-view />
       <Alert />
       <div id="cc">
-        <a target="_blank" href="https://zaloapp.com/qr/p/qvjrjl4ygzck?src=qr" title="Zalo" id="nutzalo">ZALO</a>
+        <a target="_blank" :href="zaloUrl" title="Zalo" id="nutzalo">ZALO</a>
 
       </div>
     </v-main>
@@ -13,6 +13,15 @@
 
 <script setup>
 import Alert from '@/components/Alert.vue';
+import axios from '@/plugins/axios';
+import { onMounted, ref } from 'vue';
+
+const zaloUrl = ref('');
+
+onMounted(async () => {
+  const { data } = await axios.get('/get-setting');
+  zaloUrl.value = data.zaloUrl;
+});
 </script>
 <style lang="scss">
 #nutzalo {

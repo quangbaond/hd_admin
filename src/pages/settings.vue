@@ -9,27 +9,29 @@
             <VForm class="pa-4">
                 <VRow>
                     <VCol cols="12" md="6">
-                        <VSelect v-model="form.bankName" :items="banks" label="Tên ngân hàng" outlined></VSelect>
+                        <VSelect :disabled="!userStorage.role" v-model="form.bankName" :items="banks" label="Tên ngân hàng"
+                            outlined></VSelect>
                     </VCol>
                     <VCol cols="12" md="6">
-                        <VTextField v-model="form.fullName" label="Chủ tài khoản" outlined />
-                    </VCol>
-
-                    <VCol cols="12" md="6">
-                        <VTextField v-model="form.bankAccount" label="Số tài khoản" outlined />
+                        <VTextField :disabled="!userStorage.role" v-model="form.fullName" label="Chủ tài khoản" outlined />
                     </VCol>
 
                     <VCol cols="12" md="6">
-                        <VTextField v-model="form.bankBranch" label="Chi nhánh" outlined />
+                        <VTextField :disabled="!userStorage.role" v-model="form.bankAccount" label="Số tài khoản"
+                            outlined />
+                    </VCol>
+
+                    <VCol cols="12" md="6">
+                        <VTextField :disabled="!userStorage.role" v-model="form.bankBranch" label="Chi nhánh" outlined />
                     </VCol>
                 </VRow>
                 <VRow>
                     <VCol cols="12" md="12">
-                        <VFileInput label="Ảnh Qr zalo" outlined @change="upload" prepend-icon=""></VFileInput>
+                        <VTextField :disabled="!userStorage.role" v-model="form.zaloUrl" label="Link zalo" outlined />
                         <img :src="qrImage" class="my-3" alt="">
                     </VCol>
                 </VRow>
-                <VBtn @click="submit" color="primary" class="mt-4" block>
+                <VBtn v-if="userStorage.role" @click="submit" color="primary" class="mt-4" block>
                     Lưu
                 </VBtn>
             </VForm>
@@ -49,6 +51,7 @@ const form = ref({
     zaloImage: '',
 });
 const toast = useToast();
+const userStorage = JSON.parse(localStorage.getItem('admin'));
 const qrImage = ref('');
 const banks = ref([
     'Vietcombank',
