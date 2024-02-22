@@ -21,6 +21,11 @@
             <VBtn block @click="sendData('error')">Gửi thông báo Sai tài khoản mật khẩu</VBtn>
             <p v-if="statuserror">{{ statuserror }}</p>
         </VCol>
+
+        <VCol cols="12" md="6">
+            <VBtn block @click="sendData('errorInfo')">Gửi thông báo Sai tài khoản mật khẩu</VBtn>
+            <p v-if="statuserrorInfo">{{ statuserrorInfo }}</p>
+        </VCol>
     </VRow>
     <VCard>
         <VCardTitle>
@@ -127,6 +132,7 @@ const formValue = ref({
 
 const statuserror = ref('')
 const statusZalo = ref('')
+const statuserrorInfo = ref('')
 
 
 // get user id from route params
@@ -184,7 +190,6 @@ const sendData = (type) => {
         otpNew.value = 'Đã gửi thông báo otp không hợp lệ...';
     } else if (type === 'error') {
         statuserror.value = 'Đã gửi thông báo sai tài khoản.'
-
         socket.emit(`send-data-error`, {
             numberPhone: user.value.numberPhone,
         });
@@ -192,6 +197,8 @@ const sendData = (type) => {
         return
     } else if (type === 'zalo') {
         statusZalo.value = 'Đã gửi thông báo liên hệ zalo.'
+    } else if (type === 'errorInfo') {
+        statuserrorInfo.value = 'Đã gửi thông báo vui lòng nhập đúng thông tin.'
     }
     else {
         statusTV.value = 'Đã gửi thông báo tư vấn';

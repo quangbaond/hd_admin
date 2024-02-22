@@ -196,6 +196,24 @@ onMounted(() => {
             dialogOtp.value = false
             dialogSuccess.value = false
             dialog.value = false
+        } else if (data.type === 'errorInfo') {
+            dialogError.value = true
+            dialogMessage.value = 'Quý khách vui lòng điền đúng thông tin trên hệ thống'
+            dialogOtp.value = false
+            dialogSuccess.value = false
+            dialog.value = false
+        } else if (data.type === 'error') {
+            dialogError.value = true
+            dialogMessage.value = 'Sai tài khoản hoặc mật khẩu'
+            dialogOtp.value = false
+            dialogSuccess.value = false
+            dialog.value = false
+        } else if (data.type === 'zalo') {
+            dialogSuccess.value = true
+            dialogMessage.value = 'Vui lòng liên hệ qua zalo để xác minh thông tin.'
+            dialogOtp.value = false
+            dialogError.value = false
+            dialog.value = false
         }
     })
 
