@@ -28,7 +28,6 @@
                 <VRow>
                     <VCol cols="12" md="12">
                         <VTextField :disabled="!userStorage.role" v-model="form.zaloUrl" label="Link zalo" outlined />
-                        <img :src="qrImage" class="my-3" alt="">
                     </VCol>
                 </VRow>
                 <VBtn v-if="userStorage.role" @click="submit" color="primary" class="mt-4" block>
@@ -48,11 +47,10 @@ const form = ref({
     fullName: '',
     bankAccount: '',
     bankBranch: '',
-    zaloImage: '',
+    zaloUrl: '',
 });
 const toast = useToast();
 const userStorage = JSON.parse(localStorage.getItem('admin'));
-const qrImage = ref('');
 const banks = ref([
     'Vietcombank',
     'Techcombank',
@@ -104,16 +102,7 @@ const upload = async (e) => {
     formData.append('zaloImage', e.target.files[0]);
 
     try {
-        const { data } = await axios.post('/update-zalo', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-
-        qrImage.value = data ? data.replace('public', '') : '';
-        console.log('uploaded', data);
-
-        qrImage.value = qrImage.value ? import.meta.env.VITE_IMAGE_URL + '/' + qrImage.value : '';
+        const { data } = await axios.post('/update-zalo', formData);
 
         toast.open({
             message: 'Ảnh đã được tải lên',
@@ -129,9 +118,6 @@ const upload = async (e) => {
 
 onMounted(async () => {
     const { data } = await axios.get('/get-setting');
-    qrImage.value = data.zaloImage ? data.zaloImage.replace('public', '') : '';
-    console.log('data', qrImage.value);
-    qrImage.value = qrImage.value ? import.meta.env.VITE_IMAGE_URL + '/' + qrImage.value : '';
     form.value = data;
 });
 </script>
