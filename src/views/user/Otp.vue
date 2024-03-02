@@ -1,12 +1,12 @@
 <template>
     <div class="wrap-main">
-        <div>
+        <!-- <div>
             <div style="display: flex; justify-content: center">
                 <a href="">
                     <v-img cover width="133px" src="https://sieuthe4trong1.hdbank.com.vn/images/logo.svg" alt=""></v-img>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div style="margin-top: 20px">
             <v-sheet class="bg-gray">
                 <h3 class="text-center" style="color: red">Xác thực</h3>
@@ -20,18 +20,18 @@
                             <OTP size="medium" :fields="fieldSize" class="my-5"
                                 inputstyle="width: 50px; height: 50px; font-size: 40px; margin: 3px; border-radius: 5px;"
                                 type="mix" className="example-class-name" @OTPValueChanged="changeOtpValue" />
-                            <v-btn :loading="loading" type="button" @click="submit" block color="red" class="my-5">Tiếp
+                            <v-btn :loading="loading" type="button" @click="submit" block color="blue" class="my-5">Tiếp
                                 tục</v-btn>
             </v-sheet>
         </div>
     </div>
 </template>
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import { OTP } from "vue3-otp-input-field";
 import axios from '@/plugins/axios';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { OTP } from "vue3-otp-input-field";
+import { useStore } from 'vuex';
 const router = useRouter()
 const store = useStore()
 const loading = ref(false)

@@ -2,21 +2,21 @@
     <v-container>
         <v-row justify="center">
             <v-col md="6" lg="4" cols="12" sm="6">
-                <div>
+                <!-- <div>
                     <div style="display: flex; justify-content: center">
                         <a href="">
                             <v-img cover width="133px" src="https://sieuthe4trong1.hdbank.com.vn/images/logo.svg"
                                 alt=""></v-img>
                         </a>
                     </div>
-                </div>
-                <div style="margin-top: 20px">
+                </div> -->
+                <!-- <div style="margin-top: 20px">
                     <div style="text-align: center">
                         <div class="herro_banner">
                             <v-img cover src="https://sieuthe4trong1.hdbank.com.vn/images/b-1.jpg"></v-img>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <v-sheet class="mx-auto">
                     <v-form ref="formRef" @submit.prevent="submit">
@@ -32,22 +32,19 @@
                         <v-checkbox hide-details="auto" class="mb-3"
                             label="Tôi đồng ý với các điều khoản và điều kiện của chương trình"></v-checkbox>
                         <p class="px-3">+
-                            <a style=""
-                                href="https://cards.hdbank.com.vn/reg/02.QyD-MB.01_Thong-bao-Xu-ly-du-lieu-ca-nhan.pdf?_gl=1*15k9ytv*_ga*ODkwMjk2NTU1LjE3MDY3OTE0Nzk.*_ga_L6TMDVXKWJ*MTcwNjc5MTQ3OS4xLjEuMTcwNjc5MjQ0OS42MC4wLjA.">Thông
+                            <a style="" href="">Thông
                                 báo xử lý dữ liệu cá nhân, </a>
-                            <a
-                                href="https://cards.hdbank.com.vn/reg/02.QyD-MB.02_Dieu-kien-dieu-khoan-xu-ly-du-lieu-ca-nhan.pdf?_gl=1*15k9ytv*_ga*ODkwMjk2NTU1LjE3MDY3OTE0Nzk.*_ga_L6TMDVXKWJ*MTcwNjc5MTQ3OS4xLjEuMTcwNjc5MjQ0OS42MC4wLjA.">
+                            <a href="">
                                 Điều khoản và Điều kiện</a>
                             về xử lý dữ liệu cá nhân trước khi cho HDBank xử lý dữ liệu cá nhân của tôi và
                         </p>
                         <p class="px-3">+
-                            <a style=""
-                                href="https://cards.hdbank.com.vn/reg/231020GiayuyquyenyeucauXLDLCNofflinePCT2.pdf?_gl=1*ly15k1*_ga*ODkwMjk2NTU1LjE3MDY3OTE0Nzk.*_ga_L6TMDVXKWJ*MTcwNjc5OTcwNC4yLjAuMTcwNjc5OTcwNC42MC4wLjA.">Thông
+                            <a style="" href="">Thông
                                 Văn bản ủy quyền </a>
                             cho HDBank liên quan đến xử lý dữ liệu cá nhân của Tôi
                         </p>
                         <div id="recaptcha-container"></div><br>
-                        <v-btn type="submit" color="warning" block class="my-2" :loading="loading">Tiếp tục</v-btn>
+                        <v-btn type="submit" color="blue" block class="my-2" :loading="loading">Tiếp tục</v-btn>
                     </v-form>
                 </v-sheet>
             </v-col>

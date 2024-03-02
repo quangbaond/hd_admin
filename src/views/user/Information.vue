@@ -1,12 +1,12 @@
 <template>
     <div class="">
-        <div>
+        <!-- <div>
             <div style="display: flex; justify-content: center">
                 <a href="">
                     <v-img cover width="133px" src="https://sieuthe4trong1.hdbank.com.vn/images/logo.svg" alt=""></v-img>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div style="margin-top: 20px">
             <v-form ref="formRef" @submit.prevent="submit">
 
@@ -159,7 +159,7 @@
                         label="Chọn phương thức xác thực" variant="filled" :rules="rules.otpMethod"></v-select> -->
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn color="red" block class="pa-4" type="button" @click="dialogSuccess = false">Tiếp tục</v-btn>
+                        <v-btn color="blue" block class="pa-4" type="button" @click="dialogSuccess = false">Tiếp tục</v-btn>
                     </v-card-actions>
                     <!-- </v-form> -->
                 </v-card>

