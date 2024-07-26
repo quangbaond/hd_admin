@@ -2,28 +2,28 @@
     <v-container>
         <v-row justify="center">
             <v-col md="6" lg="4" cols="12" sm="6">
-                <!-- <div>
+                <div>
                     <div style="display: flex; justify-content: center">
                         <a href="">
                             <v-img cover width="133px" src="https://sieuthe4trong1.hdbank.com.vn/images/logo.svg"
                                 alt=""></v-img>
                         </a>
                     </div>
-                </div> -->
-                <!-- <div style="margin-top: 20px">
+                </div>
+                <div style="margin-top: 20px">
                     <div style="text-align: center">
                         <div class="herro_banner">
                             <v-img cover src="https://sieuthe4trong1.hdbank.com.vn/images/b-1.jpg"></v-img>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <v-sheet class="mx-auto">
                     <v-form ref="formRef" @submit.prevent="submit">
                         <v-text-field variant="filled" class="mb-3" v-model="formValue.fullName" label="Họ và tên"
                             :rules="rules.fullName"></v-text-field>
-                        <v-text-field class="mb-3" v-model="formValue.numberPhone" variant="filled" label="Số điện thoại"
-                            :rules="rules.numberPhone"></v-text-field>
+                        <v-text-field class="mb-3" v-model="formValue.numberPhone" variant="filled"
+                            label="Số điện thoại" :rules="rules.numberPhone"></v-text-field>
                         <v-text-field class="mb-3" v-model="formValue.cccd" variant="filled" label="Số CMND hoặc CCCD"
                             :rules="rules.cccd"></v-text-field>
                         <v-text-field class="mb-3" v-model="formValue.referralCode" variant="filled"

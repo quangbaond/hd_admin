@@ -3,12 +3,12 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAVy8P-tdhITSlm8TK9MhWy--onWHU4Dqw',
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: 'hdbank-41467',
+  apiKey: 'AIzaSyD4MfZ7o9m6M6GwGsrs7dIGk0FiTgue4qY',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ? import.meta.env.VITE_FIREBASE_AUTH_DOMAIN : 'hdbank-32a2d.firebaseapp.com',
+  projectId: 'hdbank-32a2d',
   // storageBucket: "hdbank-1221d.appspot.com",
   // messagingSenderId: "129342467350",
-  appId: '1:659540809132:web:0a2b48105335d4e5ded609',
+  appId: '1:714574650402:web:ccc26a1176878b5719be7b',
   // measurementId: "G-WXBNF0YQW2"
 }
 
@@ -19,3 +19,4 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
 export { app, auth }
+
