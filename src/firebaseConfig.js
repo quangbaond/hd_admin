@@ -3,12 +3,12 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD4MfZ7o9m6M6GwGsrs7dIGk0FiTgue4qY',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ? import.meta.env.VITE_FIREBASE_API_KEY : 'AIzaSyD-1Q1J9Q1J9Q1J9Q1J9Q1J9Q1J9Q1J9Q1',
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ? import.meta.env.VITE_FIREBASE_AUTH_DOMAIN : 'hdbank-32a2d.firebaseapp.com',
-  projectId: 'hdbank-32a2d',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ? import.meta.env.VITE_FIREBASE_PROJECT_ID : 'hdbank-32a2d',
   // storageBucket: "hdbank-1221d.appspot.com",
   // messagingSenderId: "129342467350",
-  appId: '1:714574650402:web:ccc26a1176878b5719be7b',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID ? import.meta.env.VITE_FIREBASE_APP_ID : '1:129342467350:web:0f5f5d5f5d5f5d5f5d5f5d5f5d5d5d5f',
   // measurementId: "G-WXBNF0YQW2"
 }
 
